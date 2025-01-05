@@ -275,7 +275,6 @@ sensor:
   - platform: "tuya"
     name: "Forward Electricity"
     sensor_datapoint: 125
-    # TODO: double-check
     device_class: "energy"
     unit_of_measurement: "kW·h"
     state_class: "measurement"
