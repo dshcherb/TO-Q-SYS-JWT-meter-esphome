@@ -7,6 +7,11 @@ esphome:
 
 bk72xx:
   board: cbu
+  framework:
+    options:
+      # Increase the UART buffer size via a Libretiny-specific option.
+      LT_SERIAL_BUFFER_SIZE: 512
+    version: latest
 
 logger:
 
@@ -33,9 +38,7 @@ uart:
   rx_pin: RX1
   tx_pin: TX1
   baud_rate: 115200
-  # This does not work with libretiny unless a define in ArduinoCore-API is updated
-  # to increase the buffer size, see https://github.com/dshcherb/ArduinoCore-API/releases/tag/2025.1.4
-  rx_buffer_size: 1024
+  rx_buffer_size: 512
 
 
 time:

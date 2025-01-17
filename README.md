@@ -4,14 +4,9 @@ This repository contains a configuration file that can be used to flash [TO-Q-SY
 
 # UART Buffer Size Notice
 
-This config relies on a version of ArduinoCore-API based on upstream 1.5.1 with two patches:
+The UART buffer size needs to be increased since the device will not function properly otherwise. The MCU sends datapoints quickly and needs 300+ bytes of RX buffer space available at the receiving side. The main CBU chip is not able to process the default 64-byte buffer fast enough and some data is discarded: as a result only a small amount of data points is observed by the Tuya module in esphome.
 
-- The buffer size increase from default 64 bytes to 1024 bytes: https://github.com/dshcherb/ArduinoCore-API/commit/365122ef16e4065a4cc06c4f1db786a5f6d0b7d8
-- The printf feature patch from the [Libretiny fork](https://github.com/libretiny-eu/ArduinoCore-API/commit/3a4cbfcc88f8c2c6b52e406745cd51db1370f621) of ArduinoCoreAPI: https://github.com/dshcherb/ArduinoCore-API/commit/ce57327c3bbcb70d007f915a1c5c92dd6f16a5f1
-
-Without this config the device will not function properly as the MCU sends datapoints quickly and needs 300+ bytes of RX buffer space available. The main CBU chip is not able to process the default 64-byte buffer fast enough and some data is discarded: as a result only a small amount of data points is observed by the Tuya module in esphome.
-
-As it is [not possible to override](https://github.com/esphome/issues/issues/6240#issuecomment-2349516017) this config easily, this config just incorporates a downstream change to alter the buffer size.
+As of [Libretiny 1.8.0](https://github.com/libretiny-eu/libretiny/releases/tag/v1.8.0) it is possible to adjust the RX buffer size using a framework option so make sure to set `LT_SERIAL_BUFFER_SIZE: 512` which is large enough for the incoming messages from the MCU.
 
 # Flashing
 
