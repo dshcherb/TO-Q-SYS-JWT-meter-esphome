@@ -2,6 +2,8 @@
 
 This repository contains a configuration file that can be used to flash [TO-Q-SYS-JWT](https://www.tongou.com/product/single-phase-din-rail-smart-meter) with ESPHome using Libretiny as it has a [CBU](https://docs.libretiny.eu/boards/cbu/) (BK7231N) chip built-in.
 
+More details about the device are documented at the [ESPHome devices page](https://devices.esphome.io/devices/Tongou-TO-Q-SYS-JWT-power-meter).
+
 # UART Buffer Size Notice
 
 The UART buffer size needs to be increased since the device will not function properly otherwise. The MCU sends datapoints quickly and needs 300+ bytes of RX buffer space available at the receiving side. The main CBU chip is not able to process the default 64-byte buffer fast enough and some data is discarded: as a result only a small amount of data points is observed by the Tuya module in esphome.
